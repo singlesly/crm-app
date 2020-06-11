@@ -4,5 +4,5 @@
  * @class ListCustomerData
  */
 export class ListCustomerData {
-    stages: string[];
+    stages?: string[];
 }

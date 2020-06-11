@@ -4,5 +4,5 @@
  * @interface FindCustomerOptions
  */
 export interface FindCustomerOptions {
-    stages: string[];
+    stages?: string[];
 }
