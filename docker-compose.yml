@@ -1,6 +1,19 @@
 version: "3.4"
 
+networks:
+  app:
+
 services:
+  mongo:
+    image: mongo:4.2
+    container_name: crm.mongo
+    env_file:
+      - .env
+    ports:
+      - 27017:27017
+    networks:
+      - app
+
   app:
     build:
       context: .
@@ -10,3 +23,5 @@ services:
       - ./src:/app/src
     ports:
       - 3000:3000
+    networks:
+      - app
