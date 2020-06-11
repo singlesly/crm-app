@@ -7,7 +7,9 @@ import { CreateStageData } from "../dto/CreateStageData";
 import { EditStageData } from "../dto/EditStageData";
 import { Stage } from "../entity/Stage";
 import { StageRepository } from "../repository/StageRepository";
+import { Injectable } from "@nestjs/common";
 
+@Injectable()
 export class StageService {
 
     constructor(

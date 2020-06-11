@@ -11,7 +11,9 @@ import { CustomerRepository } from "../repository/CustomerRepository";
 import { StageService } from "./StageService";
 import { Contact } from "../entity/Contact";
 import { FindCustomerOptions } from "../options/FindCustomerOptions";
+import { Injectable } from "@nestjs/common";
 
+@Injectable()
 export class CustomerService {
 
     constructor(

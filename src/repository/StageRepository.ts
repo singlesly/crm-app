@@ -4,8 +4,9 @@
  * @class StageRepository
  */
 import { Stage } from "../entity/Stage";
-import { NotImplementedException } from "@nestjs/common";
+import { Injectable, NotImplementedException } from "@nestjs/common";
 
+@Injectable()
 export class StageRepository {
     public async save(stage: Stage): Promise<void> {
         throw new NotImplementedException();

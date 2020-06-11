@@ -3,10 +3,11 @@
  * @author Artem Ilinykh devsinglesly@gmail.com
  * @class CustomerRepository
  */
-import { NotImplementedException } from "@nestjs/common";
+import { Injectable, NotImplementedException } from "@nestjs/common";
 import { Customer } from "../entity/Customer";
 import { FindCustomerOptions } from "../options/FindCustomerOptions";
 
+@Injectable()
 export class CustomerRepository {
     public async findBy(options: FindCustomerOptions): Promise<Customer[]> {
         throw new NotImplementedException();
