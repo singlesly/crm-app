@@ -3,14 +3,21 @@
  * @author Artem Ilinykh devsinglesly@gmail.com
  * @class AppModule
  */
-import { Module } from "@nestjs/common";
+import { ClassSerializerInterceptor, Module, ValidationPipe } from "@nestjs/common";
 import { StageRepository } from "./repository/StageRepository";
 import { CustomerRepository } from "./repository/CustomerRepository";
 import { StageService } from "./service/StageService";
 import { CustomerService } from "./service/CustomerService";
 import { MongooseCoreModule } from "@nestjs/mongoose/dist/mongoose-core.module";
+import { StageController } from "./controller/StageController";
+import { APP_INTERCEPTOR, APP_PIPE } from "@nestjs/core";
+import { CustomerController } from "./controller/CustomerController";
 
 @Module({
+    controllers: [
+        StageController,
+        CustomerController,
+    ],
     imports: [
         MongooseCoreModule.forRoot("mongodb://mongo:27017", {
             useNewUrlParser: true,
@@ -27,6 +34,16 @@ import { MongooseCoreModule } from "@nestjs/mongoose/dist/mongoose-core.module";
         CustomerRepository,
         StageService,
         CustomerService,
+        {
+            provide: APP_PIPE,
+            useValue: new ValidationPipe({
+                transform: true,
+            }),
+        },
+        {
+            provide: APP_INTERCEPTOR,
+            useClass: ClassSerializerInterceptor,
+        }
     ]
 })
 export class AppModule {
