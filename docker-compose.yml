@@ -23,5 +23,6 @@ services:
       - ./src:/app/src
     ports:
       - 3000:3000
+      - 1337:1337
     networks:
       - app

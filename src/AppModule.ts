@@ -14,6 +14,7 @@ import { APP_INTERCEPTOR, APP_PIPE } from "@nestjs/core";
 import { CustomerController } from "./controller/CustomerController";
 import { CommandModule } from "nestjs-command";
 import { StageCommand } from "./command/StageCommand";
+import { StageGateway } from "./gateway/StageGateway";
 
 @Module({
     controllers: [
@@ -33,6 +34,7 @@ import { StageCommand } from "./command/StageCommand";
         CommandModule,
     ],
     providers: [
+        StageGateway,
         StageCommand,
         StageRepository,
         CustomerRepository,
