@@ -8,12 +8,15 @@ import { EditStageData } from "../dto/EditStageData";
 import { Stage } from "../entity/Stage";
 import { StageRepository } from "../repository/StageRepository";
 import { Injectable } from "@nestjs/common";
+import { AppEventEmitter } from "../event/AppEventEmitter";
+import { InjectEventEmitter } from "nest-emitter";
 
 @Injectable()
 export class StageService {
 
     constructor(
         private readonly stageRepository: StageRepository,
+        @InjectEventEmitter() private readonly emitter: AppEventEmitter
     ) {}
 
     public async get(id: string): Promise<Stage> {
@@ -28,6 +31,7 @@ export class StageService {
         const stage = new Stage(data.name, data.order);
 
         await this.stageRepository.save(stage);
+        this.emitter.emit("stageCreated", stage);
 
         return stage;
     }

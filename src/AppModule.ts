@@ -17,6 +17,7 @@ import { StageCommand } from "./command/StageCommand";
 import { StageGateway } from "./gateway/StageGateway";
 import { EventEmitter } from "events";
 import { NestEmitterModule } from "nest-emitter";
+import { StageCreatedEmailListener } from "./listener/StageCreatedEmailListener";
 
 @Module({
     controllers: [
@@ -37,6 +38,7 @@ import { NestEmitterModule } from "nest-emitter";
         CommandModule,
     ],
     providers: [
+        StageCreatedEmailListener,
         StageGateway,
         StageCommand,
         StageRepository,
