@@ -19,6 +19,8 @@ services:
       context: .
       dockerfile: Dockerfile
     container_name: crm.app
+    env_file:
+      - .env
     volumes:
       - ./src:/app/src
     ports:

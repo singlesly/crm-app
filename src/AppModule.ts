@@ -18,6 +18,8 @@ import { StageGateway } from "./gateway/StageGateway";
 import { EventEmitter } from "events";
 import { NestEmitterModule } from "nest-emitter";
 import { StageCreatedEmailListener } from "./listener/StageCreatedEmailListener";
+import { MailerModule } from "@nestjs-modules/mailer";
+
 
 @Module({
     controllers: [
@@ -25,6 +27,20 @@ import { StageCreatedEmailListener } from "./listener/StageCreatedEmailListener"
         CustomerController,
     ],
     imports: [
+        MailerModule.forRoot({
+            transport: {
+                host: 'smtp.yandex.ru',
+                port: 587,
+                secure: false,
+                auth: {
+                    user: process.env.MAILER_AUTH_USER,
+                    pass: process.env.MAILER_AUTH_PASS,
+                }
+            },
+            defaults: {
+                from: 'artem.ilinykh@cimpleo.com',
+            }
+        }),
         NestEmitterModule.forRoot(new EventEmitter()),
         MongooseCoreModule.forRoot("mongodb://mongo:27017", {
             useNewUrlParser: true,
