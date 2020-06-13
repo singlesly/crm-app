@@ -15,6 +15,8 @@ import { CustomerController } from "./controller/CustomerController";
 import { CommandModule } from "nestjs-command";
 import { StageCommand } from "./command/StageCommand";
 import { StageGateway } from "./gateway/StageGateway";
+import { EventEmitter } from "events";
+import { NestEmitterModule } from "nest-emitter";
 
 @Module({
     controllers: [
@@ -22,6 +24,7 @@ import { StageGateway } from "./gateway/StageGateway";
         CustomerController,
     ],
     imports: [
+        NestEmitterModule.forRoot(new EventEmitter()),
         MongooseCoreModule.forRoot("mongodb://mongo:27017", {
             useNewUrlParser: true,
             retryAttempts: 1,
