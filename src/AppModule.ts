@@ -12,6 +12,8 @@ import { MongooseCoreModule } from "@nestjs/mongoose/dist/mongoose-core.module";
 import { StageController } from "./controller/StageController";
 import { APP_INTERCEPTOR, APP_PIPE } from "@nestjs/core";
 import { CustomerController } from "./controller/CustomerController";
+import { CommandModule } from "nestjs-command";
+import { StageCommand } from "./command/StageCommand";
 
 @Module({
     controllers: [
@@ -27,9 +29,11 @@ import { CustomerController } from "./controller/CustomerController";
             user: "root",
             pass: "1234",
             authMechanism: "DEFAULT",
-        })
+        }),
+        CommandModule,
     ],
     providers: [
+        StageCommand,
         StageRepository,
         CustomerRepository,
         StageService,
